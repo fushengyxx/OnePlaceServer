@@ -3,7 +3,7 @@
  */
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var StorySchema = new Schema({
+var StoryWallSchema = new Schema({
     _id: {type: ObjectId},
     title: {type: String},
     front_image: {type: String}, // image's url
@@ -42,4 +42,4 @@ var StorySchema = new Schema({
     // tag------------
 });
 
-exports.story = mongoose.model('stories', StorySchema);
+exports.storywall = mongoose.model('storywalls', StoryWallSchema);

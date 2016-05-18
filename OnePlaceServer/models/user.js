@@ -13,12 +13,12 @@ var UserSchema = new Schema({
     mail: {type: String},
     phone: {type: String},
     image_url: {type: String},//personal image
-    location: {type: String},
+    //location: {type: String},
     signature: {type: String},
     weibo: {type: String},
     wechat: {type: String},
-    status: {type: String}, // active, block
-    type: {type: String}, // personal, group
+    status: {type: Number}, // 1 active, 2 block
+    type: {type: Number}, // 1 personal, 2 group
     register_time: {type: Date, default: Date.now},
     update_time: {type: Date, default: Date.now},
 

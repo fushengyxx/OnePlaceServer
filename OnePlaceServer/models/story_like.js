@@ -10,4 +10,4 @@ var StoryLikeSchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
-mongoose.model('storyLikes', StoryLikeSchema); 
+exports.storylike = mongoose.model('storyLikes', StoryLikeSchema);
