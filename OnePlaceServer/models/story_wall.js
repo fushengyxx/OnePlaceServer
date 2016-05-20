@@ -3,6 +3,9 @@
  */
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var BaseModel = require('./base_model');
+var ObjectId = Schema.ObjectId;
+
 var StoryWallSchema = new Schema({
     _id: {type: ObjectId},
     title: {type: String},
@@ -42,4 +45,5 @@ var StoryWallSchema = new Schema({
     // tag------------
 });
 
+StoryWallSchema.plugin(BaseModel());
 mongoose.model('StoryWall', StoryWallSchema);

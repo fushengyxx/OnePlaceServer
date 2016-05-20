@@ -3,6 +3,9 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var BaseModel = require('./base_model');
+var ObjectId = Schema.ObjectId;
+
 var StoryLikeSchema = new Schema({
     _id: {type: ObjectId},
     user_id: {type: ObjectId},
@@ -10,4 +13,5 @@ var StoryLikeSchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
+StoryLikeSchema.plugin(BaseModel());
 mongoose.model('StoryLike', StoryLikeSchema);

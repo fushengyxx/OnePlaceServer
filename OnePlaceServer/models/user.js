@@ -3,6 +3,9 @@
  */
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema; // create schema
+var BaseModel = require('./base_model');
+var ObjectId = Schema.ObjectId;
+
 var UserSchema = new Schema({
     _id: {type: ObjectId},
     account: {type: String},//for login
@@ -19,7 +22,7 @@ var UserSchema = new Schema({
     wechat: {type: String},
     status: {type: Number}, // 1 active, 2 block
     type: {type: Number}, // 1 personal, 2 group
-    register_time: {type: Date, default: Date.now},
+    create_time: {type: Date, default: Date.now},
     update_time: {type: Date, default: Date.now},
 
     story_count: {type: Number, default: 0}, // user's story
@@ -32,5 +35,6 @@ var UserSchema = new Schema({
     join_place_count: {type: Number, default: 0}
 });
 
+UserSchema.plugin(BaseModel());
 // 定义一个新模型
 mongoose.model('User', UserSchema); //模型User

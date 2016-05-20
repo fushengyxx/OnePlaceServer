@@ -3,6 +3,9 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var BaseModel = require('./base_model');
+var ObjectId = Schema.ObjectId;
+
 var MessageSchema = new Schema({
     _id: {type: ObjectId},
     /*
@@ -18,4 +21,5 @@ var MessageSchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
+MessageSchema.plugin(BaseModel());
 mongoose.model('Message', MessageSchema);
