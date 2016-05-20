@@ -9,7 +9,7 @@ var config = {
     description: 'OnePlace: 每个地方,都有故事',
 
     // mongdb配置
-    db: 'mongodb://phoesh.ddns.net/test',
+    db: 'mongodb://phoesh.ddns.net/Oneplace',
 
     // 程序运行端口
     port: 3000,
