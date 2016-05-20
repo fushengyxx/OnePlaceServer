@@ -8,9 +8,10 @@ var ObjectId = Schema.ObjectId;
 
 var FollowSchema = new Schema({
     _id: {type: ObjectId},
-    user_id: {type: ObjectId},     // master
-    follower_id: {type: ObjectId}, // fans
-    create_time: {type: Date, default: Date.now}
+    // B关注了A
+    user_id: {type: ObjectId},     // master 我, A
+    follower_id: {type: ObjectId}, // fans 我的粉丝的id, B
+    create_time: {type: Date, default: Date.now} // 粉丝什么时候关注的我
 });
 
 FollowSchema.plugin(BaseModel());

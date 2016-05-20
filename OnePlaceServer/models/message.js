@@ -10,12 +10,12 @@ var MessageSchema = new Schema({
     _id: {type: ObjectId},
     /*
      * type
-     * like: xx like your story
-     * comment: xx comment your story
-     * reply: xx reply your comment in xxx story
-     * follow: xx follow you
+     * 1 like: xx like your story
+     * 2 comment: xx comment your story
+     * 3 reply: xx reply your comment in xxx story
+     * 4 follow: xx follow you
      */
-    type: {type: String},
+    type: {type: Number},
     user_id: {type: ObjectId},
     story_id: {type: ObjectId},
     create_time: {type: Date, default: Date.now}

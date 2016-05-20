@@ -26,13 +26,13 @@ var UserSchema = new Schema({
     update_time: {type: Date, default: Date.now},
 
     story_count: {type: Number, default: 0}, // user's story
-    like_story_count: {type: Number, default: 0},
+    like_story_count: {type: Number, default: 0}, // 喜欢的故事的数量
     // for people
-    follower_count: {type: Number, default: 0}, // fans
-    following_count: {type: Number, default: 0},
+    follower_count: {type: Number, default: 0}, // fans,粉丝数
+    following_count: {type: Number, default: 0},// 关注的人的数量
     // for place
-    following_place_count: {type: Number, default: 0},
-    join_place_count: {type: Number, default: 0}
+    following_place_count: {type: Number, default: 0}, // 关注的地点的数量
+    join_place_count: {type: Number, default: 0} // 参与的地点的数量(去过什么地方)
 });
 
 UserSchema.plugin(BaseModel());
