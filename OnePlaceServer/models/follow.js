@@ -10,4 +10,4 @@ var FollowSchema = new Schema({
     follow_time: {type: Date, default: Date.now}
 });
 
-mongoose.model('follows', FollowSchema);
+mongoose.model('Follow', FollowSchema);

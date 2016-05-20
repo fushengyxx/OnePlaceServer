@@ -42,4 +42,4 @@ var StoryWallSchema = new Schema({
     // tag------------
 });
 
-exports.storywall = mongoose.model('storywalls', StoryWallSchema);
+mongoose.model('StoryWall', StoryWallSchema);

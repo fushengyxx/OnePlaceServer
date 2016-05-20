@@ -30,5 +30,7 @@ var UserSchema = new Schema({
     // for place
     following_place_count: {type: Number, default: 0},
     join_place_count: {type: Number, default: 0}
-}); // 定义一个新模型
-exports.user = mongoose.model('users', UserSchema); //模型user与集合users关联
+});
+
+// 定义一个新模型
+mongoose.model('User', UserSchema); //模型User

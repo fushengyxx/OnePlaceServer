@@ -10,4 +10,4 @@ var StorySchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
-exports.story = mongoose.model('stories', StorySchema);
+mongoose.model('Story', StorySchema);

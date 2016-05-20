@@ -42,4 +42,4 @@ var MyStorySchema = new Schema({
     // tag------------
 });
 
-exports.mystory = mongoose.model('mystories', MyStorySchema);
+mongoose.model('MyStory', MyStorySchema);

@@ -22,19 +22,3 @@ kitty.save(function (err) {
         console.log('meow');
 });
 
-
-// //创建新纪录
-// exports.create = function(req, res){
-//     var user = new user({
-//         _id : 1,
-//         acount: fusheng,
-//         password : 1234
-//     });
-//
-//     console.log('create----');
-//     user.save(function(err,doc){
-//         console.log(doc);
-//         res.redirect('/');
-//     });
-//
-// };

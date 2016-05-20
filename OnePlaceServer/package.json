@@ -1,6 +1,6 @@
 {
   "name": "OnePlaceServer",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -14,7 +14,9 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "mongodb": "3.2.6",
-    "mongoose": "4.4.16"
+    "mongoose": "4.4.16",
+    "bcryptjs": "2.3.0", // security
+    "moment": "2.12.0" // time & date
   }
 
 }

@@ -18,4 +18,4 @@ var MessageSchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
-mongoose.model('messages', MessageSchema);
+mongoose.model('Message', MessageSchema);
