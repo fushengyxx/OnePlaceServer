@@ -1,5 +1,19 @@
+/*
+ * Module dependencies
+ */
+
 var express = require('express');
+var userController = require('../controller/userController');
+
+var config = require('../config');
+
 var router = express.Router();
+
+// login
+router.post('/login', userController.login);
+
+
+
 
 
 // /* GET home page. */

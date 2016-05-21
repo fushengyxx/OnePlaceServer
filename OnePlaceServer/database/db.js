@@ -1,9 +1,9 @@
 /**
  * Created by fushengyxx on 16/5/5.
  */
-var mongoose = require('mongoose');
-//；连接数据库
-var db = mongoose.connect('mongodb://phoesh.ddns.net/Oneplace');
+// var mongoose = require('mongoose');
+// //；连接数据库
+// var db = mongoose.connect('mongodb://phoesh.ddns.net/Oneplace');
 
 /*var Cat = mongoose.model('Cat', {
     name: String,
