@@ -5,13 +5,17 @@ var config = require('../config');
 var tools = require('../common/tools');
 var eventproxy = require('eventproxy');
 var User = require('../proxy').User;
+console.log("1 yes");
 
 exports.login = function (req, res, next) {
     // var account = req.body.account;
     // var password = req.body.password;
+    console.log("2 yes");
     var account = "fusheng";
     var password = "123";
     var ep = new eventproxy();
+    console.log(account);
+    console.log("3 yes");
 
     ep.fail(next);
 
@@ -27,7 +31,5 @@ exports.login = function (req, res, next) {
         res.status(403);
        // return res.render('login/fail', {error: '用户名或密码错误.'});
     });
-
-
 
 };

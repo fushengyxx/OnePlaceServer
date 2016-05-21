@@ -18,8 +18,8 @@ var StoryWallSchema = new Schema({
 
     // location
     location: {
-        lot: {type: Double},
-        lat: {type: Double},
+        lot: {type: Number},
+        lat: {type: Number},
         country: {type: String},
         province: {type: String},
         city: {type: String},
@@ -41,7 +41,7 @@ var StoryWallSchema = new Schema({
     status: {type: Number}, // forbid, delete, draft, normal
     type: {type: Number}, // public, friend, private
     // calculate story's value
-    value: {type: Double, default: 0.0},
+    value: {type: Number, default: 0.0},
     
     // tag------------
 });
