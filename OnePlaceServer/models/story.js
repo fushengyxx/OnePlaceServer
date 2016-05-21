@@ -46,5 +46,5 @@ var StorySchema = new Schema({
     // tag------------
 });
 
-StorySchema.plugin(BaseModel());
+StorySchema.plugin(BaseModel);
 mongoose.model('Story', StorySchema);

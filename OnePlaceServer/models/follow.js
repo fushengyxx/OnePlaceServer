@@ -14,5 +14,5 @@ var FollowSchema = new Schema({
     create_time: {type: Date, default: Date.now} // 粉丝什么时候关注的我
 });
 
-FollowSchema.plugin(BaseModel());
+FollowSchema.plugin(BaseModel);
 mongoose.model('Follow', FollowSchema);

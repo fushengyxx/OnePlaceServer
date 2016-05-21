@@ -4,7 +4,6 @@
 
 var models = require('../models');
 var User = models.User;
-var uuid = require('node-uuid');
 
 /*
  * login

@@ -13,5 +13,5 @@ var StoryLikeSchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
-StoryLikeSchema.plugin(BaseModel());
+StoryLikeSchema.plugin(BaseModel);
 mongoose.model('StoryLike', StoryLikeSchema);

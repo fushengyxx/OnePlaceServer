@@ -13,5 +13,5 @@ var MyStorySchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
-MyStorySchema.plugin(BaseModel());
+MyStorySchema.plugin(BaseModel);
 mongoose.model('MyStory', MyStorySchema);

@@ -17,7 +17,7 @@ exports.login = function (req, res, next) {
 
     if(!account || !password) {
         res.status(422); // is null
-        return res.render('login/fail', {error: '信息不完整.'});
+       // return res.render('login/fail', {error: '信息不完整.'});
     }
 
     var getUser;

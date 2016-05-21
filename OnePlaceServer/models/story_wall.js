@@ -46,5 +46,5 @@ var StoryWallSchema = new Schema({
     // tag------------
 });
 
-StoryWallSchema.plugin(BaseModel());
+StoryWallSchema.plugin(BaseModel);
 mongoose.model('StoryWall', StoryWallSchema);

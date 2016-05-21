@@ -35,6 +35,6 @@ var UserSchema = new Schema({
     join_place_count: {type: Number, default: 0} // 参与的地点的数量(去过什么地方)
 });
 
-UserSchema.plugin(BaseModel());
+UserSchema.plugin(BaseModel);
 // 定义一个新模型
 mongoose.model('User', UserSchema); //模型User

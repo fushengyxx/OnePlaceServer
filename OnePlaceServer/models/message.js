@@ -21,5 +21,5 @@ var MessageSchema = new Schema({
     create_time: {type: Date, default: Date.now}
 });
 
-MessageSchema.plugin(BaseModel());
+MessageSchema.plugin(BaseModel);
 mongoose.model('Message', MessageSchema);
