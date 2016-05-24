@@ -1,10 +1,10 @@
 /**
  * Created by fushengyxx on 16/5/5.
  */
-// var mongoose = require('mongoose');
+ var mongoose = require('mongoose');
 // //；连接数据库
-// var db = mongoose.connect('mongodb://phoesh.ddns.net/Oneplace');
-
+ var db = mongoose.connect('mongodb://phoesh.ddns.net/Oneplace');
+ console.log("123");
 /*var Cat = mongoose.model('Cat', {
     name: String,
     friends: [String],

@@ -9,10 +9,9 @@
  */
 
 var mongoose = require('mongoose');
-var config = require('../config');
-
+var config = require('../config.js');
 mongoose.connect(config.db, {
-    server: {poolSoze: 20}
+    server: {poolSize: 20}
 }, function (err) {
     if(err) {
         process.exit(1);

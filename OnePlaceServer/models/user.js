@@ -6,6 +6,7 @@ var Schema = mongoose.Schema; // create schema
 var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
 
+
 var UserSchema = new Schema({
     _id: {type: ObjectId},
     account: {type: String},//for login
@@ -36,5 +37,6 @@ var UserSchema = new Schema({
 });
 
 UserSchema.plugin(BaseModel);
+UserSchema.index({account: 1}, {unique: true});
 // 定义一个新模型
 mongoose.model('User', UserSchema); //模型User
