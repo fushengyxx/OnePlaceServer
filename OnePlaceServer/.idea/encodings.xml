@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/models/story.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/models/story_wall.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/models/user.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/proxy/index.js" charset="UTF-8" />
   </component>
 </project>

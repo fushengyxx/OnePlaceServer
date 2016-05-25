@@ -3,15 +3,16 @@
  */
 
 var express = require('express');
+//var app = express();
+
 var userController = require('../controller/userController');
 
-var config = require('../config.js');
+var config = require('../config');
 
 var router = express.Router();
 
 // login
 router.post('/login', userController.login);
-
 
 
 

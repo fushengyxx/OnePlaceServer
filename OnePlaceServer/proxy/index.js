@@ -1,5 +1,6 @@
 /**
  * Created by fushengyxx on 16/5/21.
+ * 数据控制层
  */
 exports.User = require('./user');
 // exports.Follow = require('./follow');

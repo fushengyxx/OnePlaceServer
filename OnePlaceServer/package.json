@@ -22,6 +22,11 @@
     "node-uuid": "1.4.7",
     "utilitu" : "1.8.0",
     "log4js" : "^0.6.36",
-    "conncet-mongo" : "^1.2.0"
+    "conncet-mongo" : "^1.2.0",
+    "mocha" : "2.5.3",
+    "ready": "0.1.1",
+    "should": "7.1.1",
+    "supertest": "1.2.0",
+    "pedding" : "1.0.0"
   }
 }
