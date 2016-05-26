@@ -9,56 +9,62 @@ var UserModel = require('../models').User;
 var utitilty = require('utility');
 //var util = require('util');
 
-console.log("1 yes");
-
 exports.login = function (req, res, next) {
     var account = req.body.account;
     var password = req.body.password;
-    console.log("2 yes");
-    // var account = "fusheng";
-    // var password = "123";
-    // var name = "Phoes Huang";
-    // var sex = "male";
-    // var birthday = "1992-03-02 04:27";
-    // var mail = "123@123.com";
-    // var phone = "2131616156";
+    console.log(account + ', ' + password);
     var ep = new eventproxy();
     ep.fail(next);
+
+    if(!account || !password) {
+        res.json({resultCode: '信息不完整!'});
+        console.log("信息不完整");
+        return;
+    }
 
     User.getUserByAccount(account, function (err, user) {
         if (err) {
             return next(err);
         }
         if (!user) {
-            return console.log(user + " not exists");
+            console.log(user + " 用户不存在!");
+            res.json({resultCode: '用户不存在!'});
+            return;
         }
+
+        var password_db = user.password;
+        // ep.on('login_error', function (login_error) {
+        //     res.json({resultCode: '用户名或密码错误!'});
+        //     return;
+        // });
+        // tools.bcompare(password, password_db, ep.done(function(bool){
+        //     if(!bool) {
+        //         return ep.emit('login_error');
+        //     }
+        // }));
+
+        if (password != password_db){
+            console.log("用户名或密码错误!");
+            res.json({resultCode: '用户名或密码错误!'});
+            return;
+        }
+
         console.log(user);
-        console.log("3 yes");
+        var data = {resultCode: 'success', user: user};
+        var userString= JSON.stringify(data);
+
+        res.send(userString);
     });
 
-    // User.NewUser(account, password, name, sex, birthday, mail, phone, function (err, user){
-    //     if (err) {
-    //         console.log("err");
-    //        // return next(err);
-    //     }
-    //     console.log("insert");
-    //
-    // })
-
-    //ep.fail(next);
-
-    if (!account || !password) {
-        res.status(422); // is null
-        // return res.render('login/fail', {error: '信息不完整.'});
-    }
-
-    var getUser;
-    getUser = User.getUserByAccount;
-
-    ep.on('login_error', function (login_error) {
-        res.status(403);
-        // return res.render('login/fail', {error: '用户名或密码错误.'});
-    });
-
-    res.send('login success');
 };
+
+// User.NewUser(account, password, name, sex, birthday, mail, phone, function (err, user){
+//     if (err) {
+//         console.log("err");
+//        // return next(err);
+//     }
+//     console.log("insert");
+//
+// })
+
+//ep.fail(next);

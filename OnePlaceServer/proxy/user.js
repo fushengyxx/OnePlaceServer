@@ -13,12 +13,24 @@ var User = models.User;
      User.findOne({'account': new RegExp('^'+_account+'$', "i")}, callback);
  };
 
+/**
+ * 根据id查找用户
+ *
+ */
+exports.getUserById = function(id, callback) {
+    if (!id) {
+        return callback();
+    }
+    User.findOne({_id: id}, callback);
+};
+
 /*
  * find user by keywords.
  */
 exports.getUserByKey = function (key, opt, callback) {
     User.find(key, '', opt, callback);
 }
+
 exports.NewUser = function (account, password, name, sex, birthday, mail, phone, callback) {
     var user = new User();
     user.account = account;
