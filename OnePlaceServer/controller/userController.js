@@ -57,14 +57,70 @@ exports.login = function (req, res, next) {
     });
 
 };
+/*
+ * Register New user account
+ */
+exports.reg = function (req, res, next) {
+    var account = req.body.account;
+    User.getUserByAccount(account, function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            console.log(user + " 用户不存在!");
+            // res.json({resultCode: '用户不存在!'});
+           var Nuser = {
+               account : req.body.account,
+               password : req.body.password,
+               name : req.body.name,
+               sex : req.body.sex,
+            birthday : req.body.birthday,
+            mail : req.body.mail,
+            phone : req.body.phone
+           };
+            console.log(Nuser.account+' '+Nuser.name);
+            var newUser = new UserModel(Nuser);
+            newUser.save(function (err, data){
+                if(err){
+                    console.log('error');
+                }
+                else {
+                    //res.json(data);
+                }
+            });
 
-// User.NewUser(account, password, name, sex, birthday, mail, phone, function (err, user){
-//     if (err) {
-//         console.log("err");
-//        // return next(err);
-//     }
-//     console.log("insert");
-//
-// })
+            //var Newuser = new UserModel(user);
 
-//ep.fail(next);
+            // User.NewUser(account, password, name, sex, birthday, mail, phone, function (err, data) {
+            //     if (err) {
+            //         console.log("err");
+            //         //res.json(err);
+            //         return;
+            //     }
+            //     console.log("insert");
+            //
+            // });
+
+            User.getUserByAccount(account, function (err, user) {
+                if (err) {
+                    return next(err);
+                }
+                if (!user) {
+                    console.log(user + " 註冊失敗!");
+
+                    return res.json({resultCode: '註冊失敗!'});
+                }
+                else return res.json({resultCode: '註冊成功!'});
+            });
+        }
+        else {
+            var data = {resultCode: '用戶存在, 無法註冊', user: user};
+            var userString= JSON.stringify(data);
+            console.log("用戶存在, 無法註冊");
+            res.send(userString);
+        }
+
+    });
+
+};
+

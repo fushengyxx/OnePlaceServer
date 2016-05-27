@@ -13,7 +13,7 @@ var router = express.Router();
 
 // login
 router.post('/login', userController.login);
-
+router.post('/user/reg', userController.reg);
 
 
 

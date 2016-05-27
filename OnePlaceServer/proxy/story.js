@@ -40,3 +40,16 @@ exports.getStoryByQuery = function(query, opt, callback){
     });
 
 };
+
+exports.NewStory = function (account, password, name, sex, birthday, mail, phone, callback) {
+    var user = new User();
+    user.account = account;
+    user.password = password;
+    user.name = name;
+    user.sex = sex;
+    user.birthday = birthday;
+    user.mail = mail;
+    user.phone = phone;
+
+    user.save(callback);
+};

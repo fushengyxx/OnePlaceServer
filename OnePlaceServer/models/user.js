@@ -8,7 +8,7 @@ var ObjectId = Schema.ObjectId;
 
 
 var UserSchema = new Schema({
-    _id: {type: ObjectId},
+   // _id: {type: ObjectId},
     account: {type: String},//for login
     password: {type: String},
     name: {type: String}, //nickname
