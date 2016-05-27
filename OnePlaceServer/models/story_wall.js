@@ -7,7 +7,6 @@ var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
 
 var StoryWallSchema = new Schema({
-    _id: {type: ObjectId},
     story_id: {type: ObjectId}, // 方便查找定位,更新数据
     title: {type: String},
     front_image: {type: String}, // image's url

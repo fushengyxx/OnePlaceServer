@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var FollowSchema = new Schema({
-    _id: {type: ObjectId},
     // B关注了A
     user_id: {type: ObjectId},     // master 我, A
     follower_id: {type: ObjectId}, // fans 我的粉丝的id, B

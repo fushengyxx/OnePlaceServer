@@ -7,7 +7,6 @@ var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
 
 var StoryLikeSchema = new Schema({
-    _id: {type: ObjectId},
     user_id: {type: ObjectId},
     story_id: {type: ObjectId}, // story's author is from the story document
     create_time: {type: Date, default: Date.now}

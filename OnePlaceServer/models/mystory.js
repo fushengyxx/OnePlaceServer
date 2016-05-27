@@ -7,7 +7,6 @@ var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
 
 var MyStorySchema = new Schema({
-    _id: {type: ObjectId},
     user_id: {type: ObjectId},
     story_id: {type: ObjectId},
     create_time: {type: Date, default: Date.now}

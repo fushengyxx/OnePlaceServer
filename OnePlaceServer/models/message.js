@@ -7,7 +7,6 @@ var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
 
 var MessageSchema = new Schema({
-    _id: {type: ObjectId},
     /*
      * type
      * 1 like: xx like your story

@@ -7,7 +7,6 @@ var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
 
 var StorySchema = new Schema({
-    _id: {type: ObjectId},
     title: {type: String},
     front_image: {type: String}, // image's url
     content: {type: String},
