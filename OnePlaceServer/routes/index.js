@@ -6,6 +6,7 @@ var express = require('express');
 //var app = express();
 
 var userController = require('../controller/userController');
+var storyController = require('../controller/storyController');
 
 var config = require('../config');
 
@@ -13,6 +14,12 @@ var router = express.Router();
 
 // login
 router.post('/login', userController.login);
+
+// user
+router.post('/user/reg', userController.reg);
+
+// story
+router.post('/story/save', storyController.put);
 
 
 

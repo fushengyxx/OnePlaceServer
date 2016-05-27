@@ -3,9 +3,9 @@
  */
 var config = require('../config.js');
 var tools = require('../common/tools');
-var eventproxy = require('eventproxy');
+var EventProxy = require('eventproxy');
 var User = require('../proxy').User;
-var UserModel = require('../models').User;
+//var UserModel = require('../models').User;
 var utitilty = require('utility');
 //var util = require('util');
 
@@ -13,12 +13,12 @@ exports.login = function (req, res, next) {
     var account = req.body.account;
     var password = req.body.password;
     console.log(account + ', ' + password);
-    var ep = new eventproxy();
+    var ep = new EventProxy();
     ep.fail(next);
 
     if(!account || !password) {
         res.json({resultCode: '信息不完整!'});
-        console.log("信息不完整");
+        console.log("信息不完整!");
         return;
     }
 
@@ -58,13 +58,36 @@ exports.login = function (req, res, next) {
 
 };
 
-// User.NewUser(account, password, name, sex, birthday, mail, phone, function (err, user){
-//     if (err) {
-//         console.log("err");
-//        // return next(err);
-//     }
-//     console.log("insert");
-//
-// })
+exports.reg = function(req, res, next) {
+    var account = req.body.account;
+    var password = req.body.password;
+    var name = req.body.name;
+    console.log("new user!" + account + ", " + password);
+    var ep = new EventProxy();
+    ep.fail(next);
 
-//ep.fail(next);
+    User.getUserByAccount(account, function(err, user){
+        if(err) {
+            console.log("err");
+            return next(err);
+        }
+
+        if(user != null) {
+            res.json({resultCode: '该用户名已被注册!'});
+            console.log("该用户名已被注册!");
+            return;
+        }
+
+        User.newUser(account, password, name, function(err, user){
+            if(err) {
+                console.log("err");
+                return next(err);
+            }
+            var data = {resultCode: 'success', user: user};
+            var userString= JSON.stringify(data);
+
+            res.send(userString);
+        });
+    });
+
+};

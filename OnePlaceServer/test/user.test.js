@@ -3,7 +3,7 @@
  */
 var app = require('../app');
 var Mocha = require('mocha');
-var assert = require("assert")
+var assert = require("assert");
 var request = require('supertest')(app);
 var should = require("should");
 

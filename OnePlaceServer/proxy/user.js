@@ -29,17 +29,13 @@ exports.getUserById = function(id, callback) {
  */
 exports.getUserByKey = function (key, opt, callback) {
     User.find(key, '', opt, callback);
-}
+};
 
-exports.NewUser = function (account, password, name, sex, birthday, mail, phone, callback) {
+exports.newUser = function (account, password, name, callback) {
     var user = new User();
     user.account = account;
     user.password = password;
     user.name = name;
-    user.sex = sex;
-    user.birthday = birthday;
-    user.mail = mail;
-    user.phone = phone;
 
     user.save(callback);
 };

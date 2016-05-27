@@ -19,7 +19,7 @@ var createUser = exports.createUser = function(callback) {
     var password = '123';
 
     User.newAndSave('123' + key, password, callback);
-}
+};
 
 function mockUser(user) {
     return 'mock_user=' + JSON.stringify(user) + ';';
