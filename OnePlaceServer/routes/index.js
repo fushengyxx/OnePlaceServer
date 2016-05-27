@@ -22,8 +22,6 @@ router.post('/user/reg', userController.reg);
 router.post('/story/save', storyController.put);
 
 
-
-
 // /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'Express' });
