@@ -44,6 +44,18 @@ exports.getStoryByQuery = function(query, opt, callback){
 /**
  * 新建故事
  */
+exports.newStory = function(title, content, user_id, callback){
+    var story = new Story();
+    story.title = title;
+// var front_image = ;--------------------------------
+    story.content = content;
+    story.create_time = new Date();
+    story.user_id = user_id;
+
+    story.save(callback);
+
+};
+
 exports.newAndSave = function(title, content, callback){
     var story = new Story();
     story.title = title;

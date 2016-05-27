@@ -12,28 +12,30 @@ exports.put = function (req, res, next) {
 // var front_image = ;--------------------------------
     var content = req.body.content;
     console.log('11111111111111');
-    var create_time = new Date();
-   // var user_id = req.body.user_id;
-    Story.newAndSave(title, content, function (err, story) {
+    var user_id = req.body.user_id;
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    Story.newStory(title, content, user_id, function (err, story) {
         if (err) {
+            console.log("err");
             return next(err);
         }
 
-        var ep = new EventProxy();
-        console.log('2222222222');
-        ep.all('story_saved', function () {
-            var data = {resultCode: 'success', story: story};
-            var storyString = JSON.stringify(data);
-            res.send(storyString);
-        });
-        console.log('33333333');
-        ep.fail(next);
+        var data = {resultCode: 'success', story: story};
+        var storyString= JSON.stringify(data);
 
-        // User.getUserById(user_id, proxy.done(function (user){
-        //     user.story_count += 1;
-        //     user.save();
-        //     ep.emit('story_saved');
-        // }));
+        res.send(storyString);
+
+        console.log('2222222222');
+
+        //console.log('33333333');
+
+        User.getUserById(user_id, ep.done(function (user){
+            user.story_count += 1;
+            user.save();
+            ep.emit('story_saved');
+        }));
 
     });
 
