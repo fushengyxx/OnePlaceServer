@@ -7,16 +7,22 @@ var EventProxy = require('eventproxy');
 var User = require('../proxy').User;
 var Story = require('../proxy').Story;
 
-exports.put = function (req, res, next) {
+/*
+ * 新增故事
+ */
+exports.create = function (req, res, next) {
     var title = req.body.title;
 // var front_image = ;--------------------------------
     var content = req.body.content;
-    console.log('11111111111111');
+    var user_id = req.body.user_id;
+    var location = req.body.location;
+    var status = req.body.status;
+    var type = req.body.type;
     var user_id = req.body.user_id;
     var ep = new EventProxy();
     ep.fail(next);
 
-    Story.newStory(title, content, user_id, function (err, story) {
+    Story.newStory(title, content, user_id, location, status, type, function (err, story) {
         if (err) {
             console.log("err");
             return next(err);
@@ -26,10 +32,6 @@ exports.put = function (req, res, next) {
         var storyString= JSON.stringify(data);
 
         res.send(storyString);
-
-        console.log('2222222222');
-
-        //console.log('33333333');
 
         User.getUserById(user_id, ep.done(function (user){
             user.story_count += 1;

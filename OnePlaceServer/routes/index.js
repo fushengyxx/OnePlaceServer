@@ -19,7 +19,7 @@ router.post('/login', userController.login);
 router.post('/user/reg', userController.reg);
 
 // story
-router.post('/story/save', storyController.put);
+router.post('/story/save', storyController.create);
 
 
 // /* GET home page. */

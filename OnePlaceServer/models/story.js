@@ -16,8 +16,8 @@ var StorySchema = new Schema({
 
     // location
     location: {
-        lot: {type: Number},
-        lat: {type: Number},
+        lot: {type: Number}, // 经度
+        lat: {type: Number}, // 维度
         country: {type: String},  // 国家
         province: {type: String}, // 省份
         city: {type: String},     // 城市
@@ -37,8 +37,8 @@ var StorySchema = new Schema({
         comment_time: {type: Date, default: Date.now}
     },
 
-    status: {type: Number}, // forbid, delete, draft, normal
-    type: {type: Number}, // public, friend, private
+    status: {type: Number}, // 1 normal, 2 draft, 3 delete, 4 forbid
+    type: {type: Number}, // 1 public, 2 friend, 3 private
     // calculate story's value
     value: {type: Number, default: 0.0},
 
