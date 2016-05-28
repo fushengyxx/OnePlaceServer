@@ -13,7 +13,7 @@ var _          = require('lodash');
  *
  */
 exports.getStoryById = function(id, callback){
-
+    Story.findOne({_id: id}, callback);
 };
 
 /**
@@ -56,3 +56,15 @@ exports.newStory = function(title, content, user_id, location, status, type, cal
 
     story.save(callback);
 };
+
+/**
+ * 新增评论
+ */
+// exports.newComment = function(story_id, comment, callback) {
+//     var story = new Story();
+//     story.comment = comment;
+//     story.comment_count += 1;
+//     story.value += 2; //评论加2
+//
+//     story.save(callback);
+// };

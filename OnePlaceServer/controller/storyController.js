@@ -40,46 +40,33 @@ exports.create = function (req, res, next) {
         }));
 
     });
+};
 
-    // var location = null;
-    // location.lot = req.body.lot;
-    // location.lat = req.body.lat;
-    // location.country = req.body.country;
-    // location.province = req.body.province;
-    // location.city = req.body.city;
-    // location.dist = req.body.dist;
-    // location.street = req.body.street;
-    // // count
-    // var browse_count = req.body.browse_count;
-    // var like_count = req.body.like_count;
-    // var comment_count = req.body.comment_count;
-    //
-    // var status = req.body.status;
-    // var type = req.body.type;
-    //
-    // // calculate story's value
-    // var value = req.body.value;
+/*
+ * 添加评论
+ */
+exports.createComment = function (req, res, next) {
+    var story_id = req.body.story_id;
+    var comment = req.body.comment;
+    comment.date = new Date();
 
-    // Story.newAndSave(title, content, user_id, location, browse_count, like_count, comment_count, status, type, value, function (err, story) {
-    //     if (err) {
-    //         return next(err);
-    //     }
-    //
-    //     var ep = new EventProxy();
-    //
-    //     ep.all('story_saved', function () {
-    //         var data = {resultCode: 'success', story: story};
-    //         var storyString = JSON.stringify(data);
-    //         res.send(storyString);
-    //     });
-    //
-    //     ep.fail(next);
-    //
-    //     User.getUserById(user_id, proxy.done(function (user){
-    //         user.story_count += 1;
-    //         user.save();
-    //         ep.emit('story_saved');
-    //     }));
-    //
-    // });
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    Story.getStoryById(story_id, ep.done(function(story){
+        if (story.comment_count == 0) {
+            story.comments[0] = comment;
+        } else {
+            story.comments.push(comment);
+        }
+
+        story.comment_count += 1;
+        story.value += 2; //评论加2
+        story.save();
+
+        var data = {resultCode: 'success', story: story};
+        var storyString= JSON.stringify(data);
+
+        res.send(storyString);
+    }));
 };

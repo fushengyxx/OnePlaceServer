@@ -31,11 +31,11 @@ var StorySchema = new Schema({
     comment_count: {type: Number, default: 0},
 
     // comment
-    comments: {
+    comments: [{
         comment_user_id: {type: ObjectId},
         comment_content: {type: String},
-        comment_time: {type: Date, default: Date.now}
-    },
+        comment_time: {type: Date}
+    }],
 
     status: {type: Number}, // 1 normal, 2 draft, 3 delete, 4 forbid
     type: {type: Number}, // 1 public, 2 friend, 3 private

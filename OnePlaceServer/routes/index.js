@@ -20,6 +20,7 @@ router.post('/user/reg', userController.reg);
 
 // story
 router.post('/story/save', storyController.create);
+router.post('/story/createComment', storyController.createComment);
 
 
 // /* GET home page. */
