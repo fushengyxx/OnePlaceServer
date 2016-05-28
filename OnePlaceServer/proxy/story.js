@@ -53,6 +53,7 @@ exports.newStory = function(title, content, user_id, location, status, type, cal
     story.location = location;
     story.user_id = user_id;
     story.value = 10; // 新写的故事value设置为10
+    story.create_time = new Date();
 
     story.save(callback);
 };

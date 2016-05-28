@@ -7,6 +7,7 @@ var express = require('express');
 
 var userController = require('../controller/userController');
 var storyController = require('../controller/storyController');
+var followController = require('../controller/followController');
 
 var config = require('../config');
 
@@ -17,6 +18,9 @@ router.post('/login', userController.login);
 
 // user
 router.post('/user/reg', userController.reg);
+
+// follow
+router.post('/follow/create', followController.createFollow);
 
 // story
 router.post('/story/save', storyController.create);
