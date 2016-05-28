@@ -16,7 +16,9 @@ var MessageSchema = new Schema({
      */
     type: {type: Number},
     user_id: {type: ObjectId},
+    author_id: {type : ObjectId},
     story_id: {type: ObjectId},
+    has_read: {type: Boolean, default: false},
     create_time: {type: Date, default: Date.now}
 });
 
