@@ -28,18 +28,10 @@ exports.findStoryById = function(req, res, next) {
  * 新增故事
  */
 exports.create = function (req, res, next) {
-    var title = req.body.title;
-// var front_image = ;--------------------------------
-    var content = req.body.content;
-    var user_id = req.body.user_id;
-    var location = req.body.location;
-    var status = req.body.status;
-    var type = req.body.type;
-    var user_id = req.body.user_id;
     var ep = new EventProxy();
     ep.fail(next);
 
-    Story.newStory(title, content, user_id, location, status, type, function (err, story) {
+    Story.newStory(req.body, function (err, story) {
         if (err) {
             console.log("err");
             return next(err);
@@ -49,15 +41,6 @@ exports.create = function (req, res, next) {
         var storyString= JSON.stringify(data);
 
         res.send(storyString);
-
-        User.getUserById(user_id, ep.done(function (user){
-            user.story_count += 1;
-            // 参与的地点
-            user.join_place_count += 1;
-            user.save();
-           // ep.emit('story_saved');
-        }));
-
     });
 };
 
@@ -67,25 +50,39 @@ exports.create = function (req, res, next) {
 exports.createComment = function (req, res, next) {
     var story_id = req.body.story_id;
     var comment = req.body.comment;
+    var user_id = comment.comment_user_id;
     comment.date = new Date();
 
     var ep = new EventProxy();
     ep.fail(next);
 
-    Story.getStoryById(story_id, ep.done(function(story){
-        if (story.comment_count == 0) {
-            story.comments[0] = comment;
-        } else {
-            story.comments.push(comment);
+    User.getUserById(user_id, function(err, user){
+        if(err){
+            return callback(err);
         }
 
-        story.comment_count += 1;
-        story.value += 2; //评论加2
-        story.save();
+        if(user == null || user == ""){
+            return callback(err);
+        }
 
-        var data = {resultCode: 'success', story: story};
-        var storyString= JSON.stringify(data);
+        comment.comment_user_name = user.name;
+        comment.comment_user_image = user.image.imagePath;
 
-        res.send(storyString);
-    }));
+        Story.getStoryById(story_id, ep.done(function(story){
+            if (story.comment_count == 0) {
+                story.comments[0] = comment;
+            } else {
+                story.comments.push(comment);
+            }
+
+            story.comment_count += 1;
+            story.value += 2; //评论加2
+            story.save();
+
+            var data = {resultCode: 'success', story: story};
+            var storyString= JSON.stringify(data);
+
+            res.send(storyString);
+        }));
+    });
 };

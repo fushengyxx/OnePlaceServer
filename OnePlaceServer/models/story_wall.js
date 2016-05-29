@@ -14,6 +14,8 @@ var StoryWallSchema = new Schema({
     create_time: {type: Date, default: Date.now()},
     // author
     user_id: {type: ObjectId},
+    user_name: {type: String},
+    user_image: {type: String},
 
     // location
     location: {
@@ -33,6 +35,8 @@ var StoryWallSchema = new Schema({
     // comment
     comments: {
         comment_user_id: {type: ObjectId},
+        comment_user_name: {type: String},
+        comment_user_image: {type: String},
         comment_content: {type: String},
         comment_time: {type: Date, default: Date.now}
     },

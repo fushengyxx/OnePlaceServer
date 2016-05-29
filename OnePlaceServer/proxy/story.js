@@ -44,18 +44,35 @@ exports.getStoryByQuery = function(query, opt, callback){
 /**
  * 新建故事
  */
-exports.newStory = function(title, content, user_id, location, status, type, callback){
-    var story = new Story();
-    story.title = title;
-// var front_image = ;--------------------------------
-    story.content = content;
-    story.create_time = new Date();
-    story.location = location;
-    story.user_id = user_id;
-    story.value = 10; // 新写的故事value设置为10
-    story.create_time = new Date();
+exports.newStory = function(body, callback){
+    User.getUserById(body.user_id, function(err, user){
+        if(err){
+            return callback(err);
+        }
 
-    story.save(callback);
+        if(user == null || user == ""){
+            return callback(err);
+        }
+
+        var story = new Story();
+        story.title = body.title;
+// var front_image = ;--------------------------------
+        story.content = body.content;
+        story.create_time = new Date();
+        story.location = body.location;
+        story.user_id = body.user_id;
+        story.user_name = user.name;
+        story.user_image = user.image.imagePath;
+        story.status = body.status;
+        story.type = body.type;
+        story.value = 10; // 新写的故事value设置为10
+        story.save(callback);
+
+        user.story_count += 1;
+        // 参与的地点
+        user.join_place_count += 1;
+        user.save();
+    });
 };
 
 /**

@@ -20,7 +20,7 @@ var UserSchema = new Schema({
     image: {
         imageData: {type: Buffer},
         contentType : {type: String},
-        imagePath : {type: String}
+        imagePath : {type: String} // url
     },//personal image
     //location: {type: String},
     signature: {type: String},
