@@ -36,6 +36,7 @@ exports.newUser = function (nuser, callback) {
     user.account = nuser.account;
     user.password = nuser.password;
     user.name = nuser.name;
+    user.create_time = new Date();
     //user.sex = nuser.sex;
     user.save(callback);
 };

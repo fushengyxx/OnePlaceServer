@@ -35,8 +35,10 @@ exports.create = function (req, res, next) {
 
         User.getUserById(user_id, ep.done(function (user){
             user.story_count += 1;
+            // 参与的地点
+            user.join_place_count += 1;
             user.save();
-            ep.emit('story_saved');
+           // ep.emit('story_saved');
         }));
 
     });
