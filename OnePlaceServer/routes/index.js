@@ -17,7 +17,7 @@ router.post('/login', userController.login);
 
 // user
 router.post('/user/reg', userController.reg);
-
+router.post('/user/uploadAvatar', userController.uploadAvatar);
 // story
 router.post('/story/save', storyController.create);
 router.post('/story/createComment', storyController.createComment);
