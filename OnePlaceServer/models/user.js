@@ -5,7 +5,8 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema; // create schema
 var BaseModel = require('./base_model');
 var ObjectId = Schema.ObjectId;
-
+var fs = require('fs');
+var multer = require('multer');
 
 var UserSchema = new Schema({
    // _id: {type: ObjectId},
@@ -16,7 +17,11 @@ var UserSchema = new Schema({
     birthday: {type:Date},
     mail: {type: String},
     phone: {type: String},
-    image_url: {type: String},//personal image
+    image: {
+        imageData: {type: Buffer},
+        contentType : {type: String},
+        imagePath : {type: String}
+    },//personal image
     //location: {type: String},
     signature: {type: String},
     weibo: {type: String},

@@ -4,7 +4,7 @@
 
 var models = require('../models');
 var User = models.User;
-
+var fs = require('fs');
 /*
  * login
  * find user by account
@@ -31,12 +31,20 @@ exports.getUserByKey = function (key, opt, callback) {
     User.find(key, '', opt, callback);
 };
 
-exports.newUser = function (account, password, name, callback) {
+exports.newUser = function (nuser, callback) {
     var user = new User();
-    user.account = account;
-    user.password = password;
-    user.name = name;
+    user.account = nuser.account;
+    user.password = nuser.password;
+    user.name = nuser.name;
     user.create_time = new Date();
+    //user.sex = nuser.sex;
+    user.save(callback);
+};
 
+exports.imgSave = function (img, callback) {
+    var user = new User();
+    user.account = img.account;
+    user.image.imageData = fs.readFileSync(img.image.imageData);
+    user.image.contentType = img.image.imageData;
     user.save(callback);
 };

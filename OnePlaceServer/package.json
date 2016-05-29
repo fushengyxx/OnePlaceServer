@@ -28,6 +28,9 @@
     "serve-favicon": "~2.3.0",
     "should": "7.1.1",
     "supertest": "1.2.0",
-    "utilitu": "1.8.0"
+    "utility": "1.8.0",
+    "multer" : "^1.1.0",
+    "fs" : "0.0.2",
+    "formidable" : "^1.0.17"
   }
 }
