@@ -24,6 +24,7 @@ router.post('/follow/create', followController.createFollow);
 
 // story
 router.post('/story/save', storyController.create);
+router.post('/story/findOne', storyController.findStoryById);
 router.post('/story/createComment', storyController.createComment);
 
 

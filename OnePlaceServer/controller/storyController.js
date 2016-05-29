@@ -7,6 +7,23 @@ var EventProxy = require('eventproxy');
 var User = require('../proxy').User;
 var Story = require('../proxy').Story;
 
+/**
+ *  根据story_id获取story详情
+ */
+exports.findStoryById = function(req, res, next) {
+    var story_id = req.body.story_id;
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    Story.getStoryById(story_id, ep.done(function(story){
+        var data = {resultCode: 'success', story: story};
+        var storyString= JSON.stringify(data);
+
+        res.send(storyString);
+    }));
+};
+
+
 /*
  * 新增故事
  */

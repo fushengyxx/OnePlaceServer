@@ -91,3 +91,10 @@ exports.reg = function(req, res, next) {
     });
 
 };
+
+/**
+ * 根据user_id获取故事列表,即故事墙上的信息
+ */
+exports.findStoryWall = function(req, res, next) {
+
+};
