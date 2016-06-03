@@ -22,4 +22,4 @@ exports.getMessageById = function (id, callback) {
         if(err)
             return callback(err);
     });
-}
+};

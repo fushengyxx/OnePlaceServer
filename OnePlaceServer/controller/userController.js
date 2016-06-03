@@ -81,7 +81,7 @@ exports.reg = function(req, res, next) {
         if(user != null) {
             res.json({resultCode: '该用户名已被注册!'});
             console.log("该用户名已被注册!");
-            return;
+            
         }
         else {
             User.newUser(req.body, function (err, user) {

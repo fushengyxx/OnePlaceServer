@@ -8,8 +8,7 @@ var ObjectId = Schema.ObjectId;
 
 var MyStorySchema = new Schema({
     user_id: {type: ObjectId},
-    story_id: {type: ObjectId},
-    create_time: {type: Date, default: Date.now}
+    stories: [{type: ObjectId}]
 });
 
 MyStorySchema.plugin(BaseModel);

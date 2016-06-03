@@ -4,8 +4,11 @@
 var config = require('../config.js');
 var tools = require('../common/tools');
 var EventProxy = require('eventproxy');
+var models = require('../models');
 var User = require('../proxy').User;
 var Story = require('../proxy').Story;
+var MyStory = require('../proxy').MyStory;
+var StoryWall = require('../proxy').StoryWall;
 
 /**
  *  根据story_id获取story详情
@@ -36,6 +39,34 @@ exports.create = function (req, res, next) {
             console.log("err");
             return next(err);
         }
+
+        // 在"我的故事"中增加一条
+        var user_id = story.user_id;
+        var story_id = story._id;
+        MyStory.getMyStoryByUser(user_id, function(err, mystory){
+            if (err) {
+                console.log("err");
+                return next(err);
+            }
+
+            if (mystory == undefined || mystory == null) {
+                mystory = new models.MyStory();
+                mystory.user_id =user_id;
+                mystory.stories[0] = story_id;
+                mystory.save();
+            } else {
+                mystory.stories.push(story_id);
+                mystory.save();
+            }
+        });
+
+        // 在所有粉丝的"故事墙"上增加一条————————————————————————————————
+        // StoryWall.newStoryWall(story, function(err, story){
+        //     if (err) {
+        //         console.log("err");
+        //         return next(err);
+        //     }
+        // });
 
         var data = {resultCode: 'success', story: story};
         var storyString= JSON.stringify(data);
