@@ -9,6 +9,7 @@ var User = require('../proxy').User;
 var Story = require('../proxy').Story;
 var MyStory = require('../proxy').MyStory;
 var StoryWall = require('../proxy').StoryWall;
+var Follow = require('../proxy').Follow;
 
 /**
  *  根据story_id获取story详情
@@ -61,12 +62,24 @@ exports.create = function (req, res, next) {
         });
 
         // 在所有粉丝的"故事墙"上增加一条————————————————————————————————
-        // StoryWall.newStoryWall(story, function(err, story){
-        //     if (err) {
-        //         console.log("err");
-        //         return next(err);
-        //     }
-        // });
+        // 找到该作者的所有粉丝,返回粉丝user_id的数组
+        Follow.findFollowers(user_id, function (err, followers) {
+            if (err) {
+                console.log("err");
+                return next(err);
+            }
+
+            var todayDate = new tools.formatDate(new Date()){};
+
+            StoryWall.newStoryWall(story_id, followers, function(err, storywall){
+                if (err) {
+                    console.log("err");
+                    return next(err);
+                }
+            });
+        });
+        
+
 
         var data = {resultCode: 'success', story: story};
         var storyString= JSON.stringify(data);
