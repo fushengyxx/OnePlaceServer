@@ -102,14 +102,13 @@ exports.create = function (req, res, next) {
  */
 exports.getStoryWall = function(req, res, next) {
     var user_id = req.body.user_id;
-    var date = new Date();
-    console.log("-----date " + date);
-    var dateFormat = tools.endOfDay(date); // 当天00:00:00
-    //var page = req.body.page;
+    var story_date = req.body.story_date;
+    //var date = new Date();
+    //var dateFormat = tools.endOfDay(story_date); // 当天00:00:00
     var ep = new EventProxy();
     ep.fail(next);
 
-    StoryWall.getStoryWallBuyUserId(user_id, dateFormat, function(err, storywall){
+    StoryWall.getStoryWallBuyUserId(user_id, story_date, function(err, storywall){
         if(err){
             return callback(err);
         }
@@ -122,10 +121,7 @@ exports.getStoryWall = function(req, res, next) {
                 res.json({resultCode : '暂时没有故事。'});
 
             } else {
-                console.log("------ length " + stories.length);
-                console.log("------ length " + stories);
                 Story.getStoriesByIdArray(stories, function(err, fullstories){
-                    console.log("++++++++ " + fullstories);
                     var data = {resultCode: 'success', fullstories: fullstories};
                     var storyWallString= JSON.stringify(data);
 
