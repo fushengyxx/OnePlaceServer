@@ -16,8 +16,17 @@ exports.getStoryById = function(id, callback){
     Story.findOne({_id: id}, callback);
 };
 
+/**
+ * ids
+ * @param ids
+ * @param callback
+ */
 exports.getStoriesByIdArray = function(ids, callback){
     Story.find().where('_id').in(ids).exec(callback);
+};
+
+exports.getHotStory = function(callback){
+    Story.find(null, null, {sort: '-value'}, callback);
 };
 
 /**
@@ -34,13 +43,12 @@ exports.getStoryByQuery = function(query, opt, callback){
             return callback(null, []);
         }
 
-        var ep = new EventProxy();
+       // var ep = new EventProxy();
         // ep.after('story_ready', stories.length, function(){
         //     stories = _.compact(stories); // 删除不合格的story
         //     return callback(null, stories);
         // });
-        ep.fail(callback);
-
+        //ep.fail(callback);
     });
 
 };

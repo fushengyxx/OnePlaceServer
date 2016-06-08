@@ -239,3 +239,22 @@ exports.createComment = function (req, res, next) {
         }));
     });
 };
+
+/**
+ * 热门故事，更加故事value排序
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.findHotStory = function (req, res, next) {
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    var options = {sort: '-value'};
+    Story.getHotStory(function(err, stories){
+        var data = {resultCode: 'success', hotstories: stories};
+        var storyString= JSON.stringify(data);
+
+        res.send(storyString);
+    });
+};

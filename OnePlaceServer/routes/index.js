@@ -30,6 +30,7 @@ router.post('/story/createComment', storyController.createComment);
 router.post('/story/wall', storyController.getStoryWall);
 router.post('/story/browse', storyController.getFullStoryBuyId);
 router.post('/story/like', storyController.likeStory);
+router.post('/story/hotStory', storyController.findHotStory);
 
 
 // /* GET home page. */
