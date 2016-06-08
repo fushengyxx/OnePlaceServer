@@ -132,6 +132,29 @@ exports.getStoryWall = function(req, res, next) {
     });
 };
 
+/**
+ * 根据story_id获取故事全文，主要用来计算浏览量
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.getFullStoryBuyId = function(req, res, next) {
+    var story_id = req.body.story_id;
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    Story.getStoryById(story_id, ep.done(function(story){
+        story.browse_count += 1;
+        story.value += 1;
+        story.save();
+
+        var data = {resultCode: 'success', story: story};
+        var storyString= JSON.stringify(data);
+
+        res.send(storyString);
+    }));
+}
+
 /*
  * 添加评论
  */
@@ -164,7 +187,7 @@ exports.createComment = function (req, res, next) {
             }
 
             story.comment_count += 1;
-            story.value += 2; //评论加2
+            story.value += 5; //评论加2
             story.save();
 
             var data = {resultCode: 'success', story: story};

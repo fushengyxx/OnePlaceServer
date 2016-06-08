@@ -28,6 +28,7 @@ router.post('/story/save', storyController.create);
 router.post('/story/findOne', storyController.findStoryById);
 router.post('/story/createComment', storyController.createComment);
 router.post('/story/wall', storyController.getStoryWall);
+router.post('/story/browse', storyController.getFullStoryBuyId);
 
 
 // /* GET home page. */
