@@ -59,32 +59,80 @@ exports.create = function (req, res, next) {
                 mystory.stories.push(story_id);
                 mystory.save();
             }
+
         });
 
         // 在所有粉丝的"故事墙"上增加一条————————————————————————————————
-        // 找到该作者的所有粉丝,返回粉丝user_id的数组
-        Follow.findFollowers(user_id, function (err, followers) {
+        // 找到该作者的所有粉丝,返回粉丝数组
+        Follow.findFollowers(user_id, function(err, followers) {
             if (err) {
                 console.log("err");
                 return next(err);
             }
 
-            var todayDate = new tools.formatDate(new Date()){};
-
-            StoryWall.newStoryWall(story_id, followers, function(err, storywall){
-                if (err) {
-                    console.log("err");
-                    return next(err);
+            if(followers.length == 0) {
+                //return;
+            } else {
+                //var todayDate = new tools.formatDate(new Date()){};
+                var follower = null;
+                var date = new Date();
+                var dateFormat = tools.endOfDay(date); // 当天23:59:59
+                for(var i = 0; i < followers.length; i++){
+                    follower = followers[i];
+                    StoryWall.newStoryWall(story_id, follower, dateFormat, function(err, storywall){
+                        if (err) {
+                            console.log("err");
+                            return next(err);
+                        }
+                    });
                 }
-            });
+            }
         });
-        
-
 
         var data = {resultCode: 'success', story: story};
         var storyString= JSON.stringify(data);
-
         res.send(storyString);
+    });
+};
+
+/**
+ * 获取关注的人的故事墙
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.getStoryWall = function(req, res, next) {
+    var user_id = req.body.user_id;
+    //var page = req.body.page;
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    StoryWall.getStoryWallBuyUserId(user_id, function(err, storywall){
+        if(err){
+            return callback(err);
+        }
+
+        if (storywall == null) {
+            res.json({resultCode : '暂时没有关注的人。'});
+
+        } else {
+            var stories = storywall.stories;
+            if (stories == null || stories == "") {
+                res.json({resultCode : '暂时没有故事。'});
+
+            } else {
+                var storywall = null;
+                for (var i = 0; i < stories.length; i++) {
+                    Story.getStoryById(stories[i], storywall[i]);
+                }
+
+                var data = {resultCode: 'success', storywall: storywall};
+                var storyWallString= JSON.stringify(data);
+
+                res.send(storyWallString);
+            }
+        }
+
     });
 };
 

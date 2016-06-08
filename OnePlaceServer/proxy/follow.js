@@ -24,18 +24,5 @@ exports.newFollow = function(user_id, follower_id, callback) {
  * @param callback
  */
 exports.findFollowers = function (userid, callback) {
-    Follow.find({'user_id':userid}, function (err, followers) {
-        if(err) {
-            return callback(err);
-        }
-
-        if(followers.length == 0) {
-            return callback(null, []);
-        }
-
-        // var follows = null;
-        // for (var i = 0; j < followers.length; i++) {
-        //     follows[i] = followers[i];
-        // }
-    });
-}
+    Follow.find({'user_id':userid}, callback);
+};

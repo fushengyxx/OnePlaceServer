@@ -18,6 +18,11 @@ exports.formatDate = function (date, friendly) {
 
 };
 
+exports.endOfDay = function (date) {
+    date = moment(date);
+    return date.format('YYYY-MM-DD');
+};
+
 exports.validateId = function (str) {
     return (/^[a-zA-Z0-9\-_]+$/i).test(str);
 };
