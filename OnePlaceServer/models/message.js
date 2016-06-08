@@ -13,6 +13,7 @@ var MessageSchema = new Schema({
      * 2 comment: xx comment your story
      * 3 reply: xx reply your comment in xxx story
      * 4 follow: xx follow you
+     * 5 @: xx @ you
      */
     type: {type: Number},
     user_id: {type: ObjectId},

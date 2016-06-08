@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/OnePlaceServer/controller/userController.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/OnePlaceServer/database/db.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/OnePlaceServer/proxy/message.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/OnePlaceServer/proxy/story.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/OnePlaceServer/proxy/user.js" charset="UTF-8" />
   </component>

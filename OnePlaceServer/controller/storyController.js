@@ -10,6 +10,7 @@ var Story = require('../proxy').Story;
 var MyStory = require('../proxy').MyStory;
 var StoryWall = require('../proxy').StoryWall;
 var Follow = require('../proxy').Follow;
+var StoryLike = require('../proxy').StoryLike;
 
 /**
  *  根据story_id获取story详情
@@ -153,6 +154,47 @@ exports.getFullStoryBuyId = function(req, res, next) {
 
         res.send(storyString);
     }));
+}
+
+/**
+ * 喜欢故事，user 喜欢某个 story
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.likeStory = function(req, res, next) {
+    var story_id = req.body.story_id;
+    var user_id = req.body.user_id;
+    var ep = new EventProxy();
+    ep.fail(next);
+
+    // ------------------------to do:不能重复喜欢----------------------------
+    Story.getStoryById(story_id, ep.done(function(story){
+        story.like_count += 1;
+        story.value += 3;
+        story.save();
+
+    }));
+
+    // 在"我喜欢的故事"中增加一条
+    StoryLike.getStoryLikeByUser(user_id, function(err, storylike){
+        if (err) {
+            console.log("err");
+            return next(err);
+        }
+
+        if (storylike == undefined || storylike == null) {
+            storylike = new models.StoryLike();
+            storylike.user_id =user_id;
+            storylike.stories[0] = story_id;
+            storylike.save();
+        } else {
+            storylike.stories.push(story_id);
+            storylike.save();
+        }
+    });
+
+    res.json({resultCode: 'success'});
 }
 
 /*

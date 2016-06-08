@@ -29,6 +29,7 @@ router.post('/story/findOne', storyController.findStoryById);
 router.post('/story/createComment', storyController.createComment);
 router.post('/story/wall', storyController.getStoryWall);
 router.post('/story/browse', storyController.getFullStoryBuyId);
+router.post('/story/like', storyController.likeStory);
 
 
 // /* GET home page. */

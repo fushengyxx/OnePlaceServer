@@ -9,6 +9,9 @@ var ObjectId = Schema.ObjectId;
 var StoryWallSchema = new Schema({
     user_id: {type: ObjectId},
     stories: [{type: ObjectId}],
+    //stories: [{story_id: {type: ObjectId},
+    //           isLike: {type: Boolean, default: false}
+    //         }],
     story_date: {type: Date}
 });
 
