@@ -33,7 +33,7 @@ exports.newStoryWall = function (story_id, follower, dateFormat, callback) {
     });
 };
 
-exports.getStoryWallBuyUserId = function(userId, callback) {
-    StoryWall.findOne({'user_id': userId}, callback);
+exports.getStoryWallBuyUserId = function(userId, dateFormat, callback) {
+    StoryWall.findOne({'user_id': userId, 'story_date': dateFormat}, callback);
 
 };

@@ -16,6 +16,10 @@ exports.getStoryById = function(id, callback){
     Story.findOne({_id: id}, callback);
 };
 
+exports.getStoriesByIdArray = function(ids, callback){
+    Story.find().where('_id').in(ids).exec(callback);
+};
+
 /**
  * 根据查询条件,获取故事列表
  *

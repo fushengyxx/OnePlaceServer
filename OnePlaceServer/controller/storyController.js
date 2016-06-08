@@ -73,10 +73,9 @@ exports.create = function (req, res, next) {
             if(followers.length == 0) {
                 //return;
             } else {
-                //var todayDate = new tools.formatDate(new Date()){};
                 var follower = null;
                 var date = new Date();
-                var dateFormat = tools.endOfDay(date); // 当天23:59:59
+                var dateFormat = tools.endOfDay(date); // 当天00:00:00
                 for(var i = 0; i < followers.length; i++){
                     follower = followers[i];
                     StoryWall.newStoryWall(story_id, follower, dateFormat, function(err, storywall){
@@ -96,43 +95,44 @@ exports.create = function (req, res, next) {
 };
 
 /**
- * 获取关注的人的故事墙
+ * 获取所有关注的人的故事墙，即故事墙页面
  * @param req
  * @param res
  * @param next
  */
 exports.getStoryWall = function(req, res, next) {
     var user_id = req.body.user_id;
+    var date = new Date();
+    console.log("-----date " + date);
+    var dateFormat = tools.endOfDay(date); // 当天00:00:00
     //var page = req.body.page;
     var ep = new EventProxy();
     ep.fail(next);
 
-    StoryWall.getStoryWallBuyUserId(user_id, function(err, storywall){
+    StoryWall.getStoryWallBuyUserId(user_id, dateFormat, function(err, storywall){
         if(err){
             return callback(err);
         }
 
         if (storywall == null) {
             res.json({resultCode : '暂时没有关注的人。'});
-
         } else {
             var stories = storywall.stories;
             if (stories == null || stories == "") {
                 res.json({resultCode : '暂时没有故事。'});
 
             } else {
-                var storywall = null;
-                for (var i = 0; i < stories.length; i++) {
-                    Story.getStoryById(stories[i], storywall[i]);
-                }
+                console.log("------ length " + stories.length);
+                console.log("------ length " + stories);
+                Story.getStoriesByIdArray(stories, function(err, fullstories){
+                    console.log("++++++++ " + fullstories);
+                    var data = {resultCode: 'success', fullstories: fullstories};
+                    var storyWallString= JSON.stringify(data);
 
-                var data = {resultCode: 'success', storywall: storywall};
-                var storyWallString= JSON.stringify(data);
-
-                res.send(storyWallString);
+                    res.send(storyWallString);
+                });
             }
         }
-
     });
 };
 
