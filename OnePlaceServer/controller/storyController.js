@@ -241,20 +241,90 @@ exports.createComment = function (req, res, next) {
 };
 
 /**
- * 热门故事，更加故事value排序
+ * 热门故事，根据故事value排序
  * @param req
  * @param res
  * @param next
  */
 exports.findHotStory = function (req, res, next) {
-    var ep = new EventProxy();
-    ep.fail(next);
-
-    var options = {sort: '-value'};
     Story.getHotStory(function(err, stories){
         var data = {resultCode: 'success', hotstories: stories};
         var storyString= JSON.stringify(data);
 
         res.send(storyString);
+    });
+};
+
+/**
+ * 热门地点
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.findHotPlace = function (req, res, next) {
+
+};
+
+/**
+ * 我的故事
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.findMyStories = function (req, res, next) {
+    var user_id = req.body.user_id;
+    MyStory.getMyStoryByUser(user_id, function(err, mystory){
+        if (err) {
+            console.log("err");
+            return next(err);
+        }
+
+        if (mystory == undefined || mystory == null) {
+            res.json({resultCode: "还没有故事，快去写故事吧。"});
+        } else {
+            var stories = mystory.stories;
+            if (stories == null || stories.length == 0) {
+                res.json({resultCode: "还没有故事，快去写故事吧。"});
+            } else {
+                Story.getStoriesByIdArray(stories, function(err, fullstories){
+                    var data = {resultCode: 'success', fullstories: fullstories};
+                    var myStoryString= JSON.stringify(data);
+
+                    res.send(myStoryString);
+                });
+            }
+        }
+    });
+};
+
+/**
+ * 我喜欢的故事
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.findMyLikeStories = function (req, res, next) {
+    var user_id = req.body.user_id;
+    StoryLike.getStoryLikeByUser(user_id, function(err, storylike){
+        if (err) {
+            console.log("err");
+            return next(err);
+        }
+
+        if (storylike == undefined || storylike == null) {
+            res.json({resultCode: "还没有喜欢的故事，快去点赞好故事吧。"});
+        } else {
+            var stories = storylike.stories;
+            if (stories == null || stories.length == 0) {
+                res.json({resultCode: "还没有喜欢的故事，快去点赞好故事吧。"});
+            } else {
+                Story.getStoriesByIdArray(stories, function(err, fullstories){
+                    var data = {resultCode: 'success', fullstories: fullstories};
+                    var storyLikeString= JSON.stringify(data);
+
+                    res.send(storyLikeString);
+                });
+            }
+        }
     });
 };
