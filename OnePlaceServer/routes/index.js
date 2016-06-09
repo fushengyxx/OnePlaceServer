@@ -8,6 +8,9 @@ var express = require('express');
 var userController = require('../controller/userController');
 var storyController = require('../controller/storyController');
 var followController = require('../controller/followController');
+var storywallController = require('../controller/storywallController');
+var mystoryController = require('../controller/mystoryController');
+var storylikeController = require('../controller/storylikeController');
 
 var config = require('../config');
 
@@ -28,13 +31,21 @@ router.post('/follow/create', followController.createFollow);
 router.post('/story/save', storyController.create);
 router.post('/story/findOne', storyController.findStoryById);
 router.post('/story/createComment', storyController.createComment);
-router.post('/story/wall', storyController.getStoryWall);
 router.post('/story/browse', storyController.getFullStoryBuyId);
 router.post('/story/like', storyController.likeStory);
-router.post('/story/hotStory', storyController.findHotStory);
-router.post('/story/myStories', storyController.findMyStories);
-router.post('/story/likeStories', storyController.findMyLikeStories);
-router.post('/story/findByTitle', storyController.findByTitle);
+
+// story_wall
+router.post('/story/wall', storywallController.getStoryWall);
+router.post('/story/hotStory', storywallController.findHotStory);
+router.post('/story/findByTitle', storywallController.findByTitle);
+
+// story_like
+router.post('/story/likeStories', storylikeController.findMyLikeStories);
+
+// my_story
+router.post('/story/myStories', mystoryController.findMyStories);
+
+
 
 
 module.exports = router;

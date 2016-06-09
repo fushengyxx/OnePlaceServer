@@ -96,44 +96,6 @@ exports.create = function (req, res, next) {
 };
 
 /**
- * 获取所有关注的人的故事墙，即故事墙页面
- * @param req
- * @param res
- * @param next
- */
-exports.getStoryWall = function(req, res, next) {
-    var user_id = req.body.user_id;
-    var story_date = req.body.story_date;
-    //var date = new Date();
-    //var dateFormat = tools.endOfDay(story_date); // 当天00:00:00
-    var ep = new EventProxy();
-    ep.fail(next);
-
-    StoryWall.getStoryWallBuyUserId(user_id, story_date, function(err, storywall){
-        if(err){
-            return callback(err);
-        }
-
-        if (storywall == null) {
-            res.json({resultCode : '暂时没有关注的人。'});
-        } else {
-            var stories = storywall.stories;
-            if (stories == null || stories == "") {
-                res.json({resultCode : '暂时没有故事。'});
-
-            } else {
-                Story.getStoriesByIdArray(stories, function(err, fullstories){
-                    var data = {resultCode: 'success', fullstories: fullstories};
-                    var storyWallString= JSON.stringify(data);
-
-                    res.send(storyWallString);
-                });
-            }
-        }
-    });
-};
-
-/**
  * 根据story_id获取故事全文，主要用来计算浏览量
  * @param req
  * @param res
@@ -157,7 +119,7 @@ exports.getFullStoryBuyId = function(req, res, next) {
 }
 
 /**
- * 喜欢故事，user 喜欢某个 story
+ * 喜欢故事，user 喜欢某个 story，给故事点赞
  * @param req
  * @param res
  * @param next
@@ -237,116 +199,5 @@ exports.createComment = function (req, res, next) {
 
             res.send(storyString);
         }));
-    });
-};
-
-/**
- * 热门故事，根据故事value排序
- * @param req
- * @param res
- * @param next
- */
-exports.findHotStory = function (req, res, next) {
-    Story.getHotStory(function(err, stories){
-        var data = {resultCode: 'success', hotstories: stories};
-        var storyString= JSON.stringify(data);
-
-        res.send(storyString);
-    });
-};
-
-/**
- * 热门地点
- * @param req
- * @param res
- * @param next
- */
-exports.findHotPlace = function (req, res, next) {
-
-};
-
-/**
- * 根据标题搜索
- * @param req
- * @param res
- * @param next
- */
-exports.findByTitle = function (req, res, next) {
-    var title = req.body.title;
-
-    Story.queryByTitle(title, function(err, stories){
-        if (err) {
-            console.log("err");
-            return next(err);
-        }
-
-        var data = {resultCode: 'success', stories: stories};
-        var storyString= JSON.stringify(data);
-
-        res.send(storyString);
-    });
-};
-
-/**
- * 我的故事
- * @param req
- * @param res
- * @param next
- */
-exports.findMyStories = function (req, res, next) {
-    var user_id = req.body.user_id;
-    MyStory.getMyStoryByUser(user_id, function(err, mystory){
-        if (err) {
-            console.log("err");
-            return next(err);
-        }
-
-        if (mystory == undefined || mystory == null) {
-            res.json({resultCode: "还没有故事，快去写故事吧。"});
-        } else {
-            var stories = mystory.stories;
-            if (stories == null || stories.length == 0) {
-                res.json({resultCode: "还没有故事，快去写故事吧。"});
-            } else {
-                Story.getStoriesByIdArray(stories, function(err, fullstories){
-                    var data = {resultCode: 'success', fullstories: fullstories};
-                    var myStoryString= JSON.stringify(data);
-
-                    res.send(myStoryString);
-                });
-            }
-        }
-    });
-};
-
-/**
- * 我喜欢的故事
- * @param req
- * @param res
- * @param next
- */
-exports.findMyLikeStories = function (req, res, next) {
-    var user_id = req.body.user_id;
-    StoryLike.getStoryLikeByUser(user_id, function(err, storylike){
-        if (err) {
-            console.log("err");
-            return next(err);
-        }
-
-        if (storylike == undefined || storylike == null) {
-            res.json({resultCode: "还没有喜欢的故事，快去点赞好故事吧。"});
-        } else {
-            var stories = storylike.stories;
-            if (stories == null || stories.length == 0) {
-                res.json({resultCode: "还没有喜欢的故事，快去点赞好故事吧。"});
-            } else {
-                Story.getStoriesByIdArray(stories, function(err, fullstories){
-                    var data = {resultCode: 'success', fullstories: fullstories};
-                    var storyLikeString= JSON.stringify(data);
-
-                    res.send(storyLikeString);
-                });
-            }
-        }
     });
 };
