@@ -40,7 +40,7 @@ exports.getStoryWall = function(req, res, next) {
 
             } else {
                 Story.getStoriesByIdArray(stories, function(err, fullstories){
-                    var data = {resultCode: 'success', fullstories: fullstories};
+                    var data = {resultCode: 'success', fullstories: fullstories, wallowner_id: storywall.user_id};
                     var storyWallString= JSON.stringify(data);
 
                     res.send(storyWallString);
