@@ -266,6 +266,16 @@ exports.findHotPlace = function (req, res, next) {
 };
 
 /**
+ * 根据标题搜索
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.queryBuyTitle = function (req, res, next) {
+
+};
+
+/**
  * 我的故事
  * @param req
  * @param res

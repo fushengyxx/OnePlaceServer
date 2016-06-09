@@ -14,7 +14,12 @@ var multer = require('multer');
 var mime = require('../routes/mime');
 var AVATAR_UPLOAD_FOLDER = '/avatar/';
 
-
+/**
+ * 登陆
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.login = function (req, res, next) {
     var account = req.body.account;
     var password = req.body.password;
@@ -64,6 +69,12 @@ exports.login = function (req, res, next) {
 
 };
 
+/**
+ * 注册
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.reg = function(req, res, next) {
     var account = req.body.account;
     var password = req.body.password;
@@ -99,6 +110,34 @@ exports.reg = function(req, res, next) {
 
 };
 
+/**
+ * 上传用户头像，直接使用url
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.changeImage = function (req, res, next) {
+    var user_id = req.body.user_id;
+    var image = req.body.image;
+
+    User.getUserById(user_id, function (err, user) {
+        if (err) {
+            console.log("err");
+            return next(err);
+        }
+
+        user.image = image;
+        user.save();
+        res.json({resultCode : 'success'});
+    })
+};
+
+/**
+ * 上传图片
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.uploadAvatar = function (req, res, next) {
     console.log('req : ' + req.body);
     console.log('req : ' + req.files);
@@ -190,12 +229,5 @@ exports.uploadAvatar = function (req, res, next) {
     });
     
     
-
-};
-
-/**
- * 根据user_id获取故事列表,即故事墙上的信息
- */
-exports.findStoryWall = function(req, res, next) {
 
 };

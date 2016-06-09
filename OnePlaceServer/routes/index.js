@@ -19,6 +19,7 @@ router.post('/login', userController.login);
 // user
 router.post('/user/reg', userController.reg);
 router.post('/user/uploadAvatar', userController.uploadAvatar);
+router.post('/user/changeImage', userController.changeImage);
 
 // follow
 router.post('/follow/create', followController.createFollow);
