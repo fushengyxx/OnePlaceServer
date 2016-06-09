@@ -68,7 +68,6 @@ exports.newStory = function(body, callback){
 
         var story = new Story();
         story.title = body.title;
-// var front_image = ;--------------------------------
         story.content = body.content;
         story.create_time = tools.formatDate(new Date(), false);
         story.location = body.location;
@@ -78,6 +77,21 @@ exports.newStory = function(body, callback){
         story.status = body.status;
         story.type = body.type;
         story.value = 10; // 新写的故事value设置为10
+        // -------to do
+        var images = ["http://img3.duitang.com/uploads/item/201604/24/20160424000523_xfQwL.jpeg",
+            "http://imgsrc.baidu.com/forum/w%3D580/sign=824cd223e6dde711e7d243fe97efcef4/5d5e53ee3d6d55fbe5d514006e224f4a21a4ddca.jpg",
+            "http://www.nitutu.com/uploads/allimg/150814/1_0Q40HGV0G.jpg",
+            "http://img.pconline.com.cn/images/upload/upc/tx/itbbs/1309/17/c28/25794786_1379404775838_mthumb.jpg",
+            "http://uploads.xuexila.com/allimg/1507/641-150G31I335.jpg",
+            "http://pic1.win4000.com/mobile/c/520b5350b802d.jpg",
+            "http://i0.hdslb.com/video/c7/c7f134f01e9220dfee0b2f923e483ad0.jpg",
+            "http://i2.hdslb.com/video/f2/f2e1291ee47d586dab1cef549311771b.jpg",
+            "http://img0.imgtn.bdimg.com/it/u=497386873,1022542517&fm=21&gp=0.jpg",
+            "http://img0.ph.126.net/vjafE5hxRQLHesSuqAnEEA==/4786481979064839750.jpg",
+            "http://imgstore.cdn.sogou.com/app/a/100540002/469034.jpg"];
+        var i = Math.ceil(Math.random() * 10);
+        story.front_image = images[i];
+
         story.save(callback);
 
         user.story_count += 1;
