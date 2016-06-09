@@ -271,8 +271,20 @@ exports.findHotPlace = function (req, res, next) {
  * @param res
  * @param next
  */
-exports.queryBuyTitle = function (req, res, next) {
+exports.findByTitle = function (req, res, next) {
+    var title = req.body.title;
 
+    Story.queryByTitle(title, function(err, stories){
+        if (err) {
+            console.log("err");
+            return next(err);
+        }
+
+        var data = {resultCode: 'success', stories: stories};
+        var storyString= JSON.stringify(data);
+
+        res.send(storyString);
+    });
 };
 
 /**

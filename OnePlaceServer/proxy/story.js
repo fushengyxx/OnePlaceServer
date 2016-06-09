@@ -88,6 +88,16 @@ exports.newStory = function(body, callback){
 };
 
 /**
+ * 通过title模糊查询
+ * @param title
+ * @param callback
+ */
+exports.queryByTitle = function(title, callback){
+    var qs = new RegExp(title);
+    Story.where('title', qs).exec(callback);
+};
+
+/**
  * 新增评论
  */
 // exports.newComment = function(story_id, comment, callback) {

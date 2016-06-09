@@ -34,6 +34,7 @@ router.post('/story/like', storyController.likeStory);
 router.post('/story/hotStory', storyController.findHotStory);
 router.post('/story/myStories', storyController.findMyStories);
 router.post('/story/likeStories', storyController.findMyLikeStories);
+router.post('/story/findByTitle', storyController.findByTitle);
 
 
 module.exports = router;
