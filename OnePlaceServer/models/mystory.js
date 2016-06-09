@@ -8,7 +8,7 @@ var ObjectId = Schema.ObjectId;
 
 var MyStorySchema = new Schema({
     user_id: {type: ObjectId},
-    stories: [{type: ObjectId}]
+    stories: [{type: ObjectId}] // user的所有故事
 });
 
 MyStorySchema.plugin(BaseModel);

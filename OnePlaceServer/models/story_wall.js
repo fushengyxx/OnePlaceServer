@@ -8,11 +8,11 @@ var ObjectId = Schema.ObjectId;
 
 var StoryWallSchema = new Schema({
     user_id: {type: ObjectId},
-    stories: [{type: ObjectId}],
+    stories: [{type: ObjectId}],//user在date这天能看到的所有故事
+    story_date: {type: Date}
     //stories: [{story_id: {type: ObjectId},
     //           isLike: {type: Boolean, default: false}
     //         }],
-    story_date: {type: Date}
 });
 
 StoryWallSchema.plugin(BaseModel);

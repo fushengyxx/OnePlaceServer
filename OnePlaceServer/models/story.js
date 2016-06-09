@@ -15,7 +15,6 @@ var StorySchema = new Schema({
     user_id: {type: ObjectId},
     user_name: {type: String},
     user_image: {type: String},
-
     // location
     location: {
         lot: {type: Number}, // 经度
@@ -26,12 +25,10 @@ var StorySchema = new Schema({
         dist: {type: String},     // 地区
         street: {type: String}    // 街道
     },
-
     // count
     browse_count: {type: Number, default: 0},
     like_count: {type: Number, default: 0},
     comment_count: {type: Number, default: 0},
-
     // comment
     comments: [{
         comment_user_id: {type: ObjectId},
@@ -40,11 +37,9 @@ var StorySchema = new Schema({
         comment_content: {type: String},
         comment_time: {type: Date}
     }],
-
     status: {type: Number}, // 1 normal, 2 draft, 3 delete, 4 forbid
     type: {type: Number}, // 1 public, 2 friend, 3 private
-    // calculate story's value
-    value: {type: Number, default: 0.0},
+    value: {type: Number, default: 0.0},// calculate story's value
 
     // tag------------
 });
